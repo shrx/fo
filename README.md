@@ -4,7 +4,7 @@ fo, short for Find & Open, is a ksh script that finds all folders with a given n
 
 Prerequisites, dependencies
 ---------------------------
-You need to have [ksh][1] installed. Yhe script doesn't work in bash because changes to variables are lost within a piped process. You can read a discussion about this [here][2].
+You need to have [ksh][1] installed. The script doesn't work in bash because changes to variables are lost within a piped process. You can read a discussion about this [here][2].
 
 [1]: http://www.kornshell.com/
 [2]: http://ubuntuforums.org/showthread.php?t=312017
