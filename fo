@@ -1,0 +1,32 @@
+#!/bin/ksh
+
+if [ $# -ne 0 ]; then
+	folder="$*"
+	hits=$(locate -ic $folder)
+	if [ "$hits" == "0" ]; then
+		echo "Folder ""$folder"" not found."
+	elif [ "$hits" == "1" ]; then
+		folder=$(locate -i $folder)
+		if [ -d "$folder" ]; then
+			open $folder
+		fi
+	else
+		c=0
+		locate -i "$folder" | while read line
+			do
+				if [ -d "$line" ]; then
+					result[c]="$line"
+					((c++))
+				fi
+			done
+		if (( c == 1 )); then
+			open "${result[0]}"
+		else
+			for i in ${!result[*]}
+				do
+  	 			 	printf "%s\n" "${result[$i]}"
+				done		
+		fi
+	fi
+fi
+exit
