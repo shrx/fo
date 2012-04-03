@@ -1,10 +1,15 @@
 #!/bin/ksh
 
+# released under Creative Commons Attribution-ShareAlike 3.0
+# http://creativecommons.org/licenses/by-sa/3.0/
+# v1.0
+# 3. 4. 2012
+
 if [ $# -ne 0 ]; then
 	folder="$*"
 	hits=$(locate -ic $folder)
 	if [ "$hits" == "0" ]; then
-		echo "Folder ""$folder"" not found."
+		echo "Folder $folder not found."
 	elif [ "$hits" == "1" ]; then
 		folder=$(locate -i $folder)
 		if [ -d "$folder" ]; then
@@ -28,5 +33,7 @@ if [ $# -ne 0 ]; then
 				done		
 		fi
 	fi
+else
+	echo "Usage: fo <folder name>"
 fi
 exit
