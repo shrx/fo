@@ -2,18 +2,20 @@
 
 # released under Creative Commons Attribution-ShareAlike 3.0
 # http://creativecommons.org/licenses/by-sa/3.0/
-# v1.0
+# v1.0.2
 # 3. 4. 2012
 
 if [ $# -ne 0 ]; then
 	folder="$*"
 	hits=$(locate -ic $folder)
 	if [ "$hits" == "0" ]; then
-		echo "Folder $folder not found."
+		echo "Folder named \"$folder\" not found."
 	elif [ "$hits" == "1" ]; then
-		folder=$(locate -i $folder)
-		if [ -d "$folder" ]; then
-			open $folder
+		directory=$(locate -i $folder)
+		if [ -d "$directory" ]; then
+			open $directory
+		else
+			echo "Folder named \"$folder\" not found."
 		fi
 	else
 		c=0
