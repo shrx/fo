@@ -2,7 +2,7 @@
 
 # released under Creative Commons Attribution-ShareAlike 3.0
 # http://creativecommons.org/licenses/by-sa/3.0/
-# v1.0.2
+# v1.1
 # 3. 4. 2012
 
 if [ $# -ne 0 ]; then
@@ -12,7 +12,7 @@ if [ $# -ne 0 ]; then
 		echo "Folder named \"$folder\" not found."
 	elif [ "$hits" == "1" ]; then
 		directory=$(locate -i $folder)
-		if [ -d "$directory" ]; then
+		if [[ -d "$directory" && `echo ${line##*/} | tr [:upper:] [:lower:]` = *`echo $folder | tr [:upper:] [:lower:]`* ]]; then
 			open $directory
 		else
 			echo "Folder named \"$folder\" not found."
@@ -21,7 +21,7 @@ if [ $# -ne 0 ]; then
 		c=0
 		locate -i "$folder" | while read line
 			do
-				if [ -d "$line" ]; then
+				if [[ -d "$line" && `echo ${line##*/} | tr [:upper:] [:lower:]` = *`echo $folder | tr [:upper:] [:lower:]`* ]]; then
 					result[c]="$line"
 					((c++))
 				fi
