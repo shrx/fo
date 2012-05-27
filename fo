@@ -2,27 +2,31 @@
 
 # released under Creative Commons Attribution-ShareAlike 3.0
 # http://creativecommons.org/licenses/by-sa/3.0/
-# v1.1.2
-# 4. 4. 2012
+# v1.2
+# 27. 5. 2012
+
+source ~/.profile   # comment or edit this line if you have a different settings file.
+
+NUMBER=0
 
 if [ $# -ne 0 ]; then
 	folder="$*"
 	hits=$(locate -ic $folder)
-	if [ "$hits" == "0" ]; then
+	if [ "$hits" == "0" ]; then                      # zero probable hits
 		echo "Folder named \"$folder\" not found."
-	elif [ "$hits" == "1" ]; then
+	elif [ "$hits" == "1" ]; then                    # single probable hit
 		directory=$(locate -i $folder)
 		if [ -d "$directory" ]; then
 			open $directory
 		else
 			echo "Folder named \"$folder\" not found."
 		fi
-	else
+	else                                             # multiple probable hits
 		c=0
 		locate -i "$folder" | while read line
 			do
 				if [[ -d "$line" && `echo ${line##*/} | tr [:upper:] [:lower:]` = *`echo $folder | tr [:upper:] [:lower:]`* ]]; then
-					result[c]="$line"
+					result[c]="($(($c+1))) $line"
 					((c++))
 				fi
 			done
@@ -34,7 +38,19 @@ if [ $# -ne 0 ]; then
 			for i in ${!result[*]}
 				do
   	 			 	printf "%s\n" "${result[$i]}"
-				done		
+				done
+			printf "\n"
+			while ([[ $NUMBER -lt 1 || $NUMBER -gt $c ]] && [[ "$NUMBER" != "q" ]]); do   # selecting the right hit
+				printf "input hit number (1-$c) or q to quit: "
+				read -s NUMBER
+				if [ "$NUMBER" == "q" ]; then
+					break
+				elif [[ $NUMBER -ge 1 && $NUMBER -le $c ]]; then
+					open "${result[(($NUMBER-1))]#* }"
+				else
+					echo "hit number out of bounds. try again."
+				fi
+			done
 		fi
 	fi
 else

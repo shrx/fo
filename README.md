@@ -13,5 +13,5 @@ Usage
 -----
 Run the script when you want to find and open a chosen folder, for example: `fo foo bar` will search for folders named "foo bar" (case insensitive).
 If a single folder is found, it will open.
-If more folders are found, their locations will be displayed instead.
+If more folders are found, their locations will be displayed instead. You may then enter the desired location's index number and that location will open.
 The script uses the `locate` command so recently created folders might not yet be in the database. I chose `locate` over `find` because it's much faster.
