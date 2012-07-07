@@ -2,8 +2,8 @@
 
 # released under Creative Commons Attribution-ShareAlike 3.0
 # http://creativecommons.org/licenses/by-sa/3.0/
-# v1.2
-# 27. 5. 2012
+# v1.2.1
+# 7. 7. 2012
 
 source ~/.profile   # comment or edit this line if you have a different settings file.
 
@@ -33,7 +33,7 @@ if [ $# -ne 0 ]; then
 		if (( c == 0 )); then
 			echo "Folder named \"$folder\" not found."
 		elif (( c == 1 )); then
-			open "${result[0]}"
+			open "${result[0]#* }"
 		else
 			for i in ${!result[*]}
 				do
