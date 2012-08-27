@@ -2,8 +2,8 @@
 
 # released under Creative Commons Attribution-ShareAlike 3.0
 # http://creativecommons.org/licenses/by-sa/3.0/
-# v1.2.1
-# 7. 7. 2012
+# v1.2.2
+# 27. 8. 2012
 
 source ~/.profile   # comment or edit this line if you have a different settings file.
 
@@ -17,7 +17,7 @@ if [ $# -ne 0 ]; then
 	elif [ "$hits" == "1" ]; then                    # single probable hit
 		directory=$(locate -i $folder)
 		if [ -d "$directory" ]; then
-			open $directory
+			open "$directory"
 		else
 			echo "Folder named \"$folder\" not found."
 		fi
